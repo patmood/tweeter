@@ -7,3 +7,7 @@
 th {
   text-align: left;
 }
+#silly {
+  display: none;
+  margin: auto;
+}
