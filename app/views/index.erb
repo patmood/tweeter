@@ -1,13 +1,29 @@
 <div class="container">
   <h1>Tweeter</h1>
+  <% if @user %>
 
-  <form action="/tweet" method="post" id="tweet_form">
-    
-    <input name="tweet" id="tweet" placeholder="username">
-    <input type="submit" value="Get Tweets!">
-  </form>
+
+  <div>    
+    <form action="/tweet" method="post" id="tweet_form">
+      <p>Doesnt actually tweet, cos i didnt want to spam my own account...</p>
+      <input name="tweet" id="tweet" placeholder="Enter Tweet Here!">
+      <input type="submit" value="Tweet!">
+    </form>
+  
+    <% @user.twitter_client.user_timeline.each do |tweet| %>
+      <p><%= tweet[:text] %></p>
+    <% end %>
+
+  </div>
+
 
   <div id="silly">
     <img src="images/silly.gif">
   </div>  
+  
+  <% else %>
+
+  <button class="signin_button"><a href="/signin">Sign in with Twitter</a></button>
+
+  <% end %>
 </div>

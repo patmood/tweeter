@@ -11,3 +11,14 @@ th {
   display: none;
   margin: auto;
 }
+.signin_button, .signin_button.a{
+  color: #1AB7EA;
+  background-color: #E1E1E1;
+  border-radius: 8px;
+  padding: 10px;
+  text-decoration: none;
+  border: none;
+}
+.signin_button:hover{
+  background-color: #CCCCCC;
+}
