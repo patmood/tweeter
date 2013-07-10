@@ -11,10 +11,11 @@ $(document).ready(function() {
       type:'POST',
       data: tweet,
       beforeSend: function(){
+        // disable button
+        $('input[type="submit"]').attr('disabled', 'disabled');
         $('#silly').show();
       },
       success: function(data){
-        $('#silly').html(data.content);
         beginPollingJob(data.job_id);
       },
       error: function(){
@@ -30,9 +31,10 @@ function beginPollingJob(jobId) {
       url:'/status/' + jobId,
       type:'GET',
       success: function(data){
-        console.log(data);
         if(! data.done) {
           beginPollingJob(jobId);
+        } else {
+          successAction();
         }
       },
       error: function(){
@@ -41,3 +43,17 @@ function beginPollingJob(jobId) {
     });
   },50);
 }
+
+function successAction(){
+  $('input[type="submit"]').removeAttr('disabled');
+  $.ajax({
+      url:'/tweet_list',
+      type:'POST',
+      success: function(data){
+        $('#silly').html(data.content);
+      },
+      error: function(){
+        alert("Fail");
+      }
+    });
+};

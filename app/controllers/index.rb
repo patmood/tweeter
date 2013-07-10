@@ -11,10 +11,17 @@ post '/tweet' do
   # @userclient.update(params[:tweet]) # Submit Directly to Twitter
   job_id = @user.tweet(params[:tweet])
 
-  @timeline = @userclient.user_timeline()
   content_type :json
-  { content: erb(:tweets, :layout => false),
-    job_id: job_id }.to_json
+  { job_id: job_id }.to_json
+end
+
+post '/tweet_list' do
+  @user = User.find(session[:user_id])
+  @userclient = @user.twitter_client
+  @timeline = @userclient.user_timeline()
+
+  content_type :json
+  { content: erb(:tweets, :layout => false) }.to_json
 end
 
 get '/signin' do
