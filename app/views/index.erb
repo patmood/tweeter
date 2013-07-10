@@ -5,13 +5,13 @@
 
   <div>    
     <form action="/tweet" method="post" id="tweet_form">
-      <p>Doesnt actually tweet, cos i didnt want to spam my own account...</p>
       <input name="tweet" id="tweet" placeholder="Enter Tweet Here!">
       <input type="submit" value="Tweet!">
     </form>
-  
-    <% @user.twitter_client.user_timeline.each do |tweet| %>
+    <% if @timeline %>
+    <% @timeline.each do |tweet| %>
       <p><%= tweet[:text] %></p>
+    <% end %>
     <% end %>
 
   </div>

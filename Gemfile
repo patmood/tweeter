@@ -24,3 +24,6 @@ end
 
 gem 'oauth'
 gem 'twitter'
+gem 'sidekiq'
+gem 'redis'
+
